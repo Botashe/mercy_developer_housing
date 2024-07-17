@@ -1,0 +1,61 @@
+﻿@using System.Security.Claims;
+@model IEnumerable<MercDevs_ej2.Models.Recepcionequipo>
+
+@{
+    ViewData["Title"] = "Página de Inicio";
+}
+
+@if (User.Identity!.IsAuthenticated)
+{
+    <div class="text-center">
+        <h1 class="display-4">
+            Bienvenido
+            @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()
+        </h1>
+        <p>Requerimientos del laboratorio: Completado</p>
+        <h1 class="display-6">
+            Equipos recepcionados en Proceso
+        </h1>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Fecha de Recepcion del Equipo</th>
+                <th>Marca de PC</th>
+                <th>Modelo de PC</th>
+                <th>Nombre del Servicio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdClienteNavigation.Nombre</td>
+                    <td>@item.IdClienteNavigation.Apellido</td>
+                    <td>@item.IdClienteNavigation.Correo</td>
+                    <td>@item.Fecha?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.MarcaPc</td>
+                    <td>@item.ModeloPc</td>
+                    <td>
+                        <a asp-controller="Servicios" asp-action="Details" asp-route-id="@item.IdServicio" class="btn btn-outline-warning btn-sm">
+                            Detalles del Servicio
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Recepcionequipoes" asp-action="EquiposRecepcionadosDelCliente" asp-route-clienteId="@item.IdCliente" class="btn btn-outline-secondary">
+                            Recepción de Equipo
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @await Html.PartialAsync("Logo_1")
+}
+

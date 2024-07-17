@@ -1,0 +1,31 @@
+﻿@model MercDevs_ej2.Models.Descripcionservicio
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles Descripcion Servicio</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ServicioIdServicioNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ServicioIdServicioNavigation.IdServicio)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdDescServ"><button class="btn btn-warning">Editar</button></a>
+    <a asp-action="Index"><button class="btn btn-outline-secondary">Volver a la Lista</button></a>
+</div>
+
+@await Html.PartialAsync("Logo_1")

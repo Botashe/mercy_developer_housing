@@ -1,0 +1,1 @@
+Solo usa el diseño de la tabla

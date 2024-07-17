@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Diagnosticosolucion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Diagnostico y Solucion</h1>
+
+<p>
+    <a asp-action="Create"><button type="button" class="btn btn-success">Crear Diagnostico</button></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionDiagnostico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionSolucion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatosFichaTecnica)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionDiagnostico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionSolucion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatosFichaTecnica.IdDatosFichaTecnica)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdDiagnosticoSolucion" class="btn btn-outline-primary">Editar</a> 
+                <a asp-action="Details" asp-route-id="@item.IdDiagnosticoSolucion" class="btn btn-outline-warning">Detalles</a> 
+                <a asp-action="Delete" asp-route-id="@item.IdDiagnosticoSolucion" class="btn btn-outline-danger">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
